@@ -1,12 +1,14 @@
-
+# Interfaz web interactiva con SolaraViz para los robots de limpieza.
 # Autores:
 # Juan Pablo Rodriguez Carrillo A01802063
 # Lian Yael Ontiveros Soto A01803416
 # Fecha: 16/11/2026.
 # Ejecutar: solara run app.py
 
+import solara
 from mesa.visualization import Slider, SolaraViz, SpaceRenderer
 from mesa.visualization.components import AgentPortrayalStyle, PropertyLayerStyle
+from mesa.visualization.utils import update_counter
 
 from modeloLimpieza import ModeloLimpieza
 
@@ -36,6 +38,24 @@ def propertyLayerPortrayal(capa):
 	return estilo
 
 
+# Proposito: mostrar el tiempo transcurrido y los movimientos en pantalla.
+# Parametros: model, instancia activa de ModeloLimpieza.
+# Retorno: tarjeta de Solara con los tres indicadores solicitados.
+@solara.component
+def panelInformacion(model):
+	update_counter.get()
+	tiempoPasado = model.tiempoActual
+	movimientosTotales = model.movimientosAcumulados
+	movimientosPorAgente = 0.0
+	if model.numeroAgentes > 0:
+		movimientosPorAgente = movimientosTotales / model.numeroAgentes
+
+	with solara.Card("Metricas de la simulacion"):
+		solara.Markdown(f"Tiempo transcurrido (pasos): **{tiempoPasado}**")
+		solara.Markdown(f"Movimientos totales: **{movimientosTotales}**")
+		solara.Markdown(f"Movimientos por agente: **{movimientosPorAgente:.2f}**")
+
+
 # Los parametros se pasan por nombre para que SolaraViz pueda reiniciar el modelo.
 PARAMETROS_MODELO = {
 	"filas": Slider("Filas", value=10, min=2, max=30, step=1),
@@ -60,11 +80,11 @@ renderizador.render(
 )
 
 pagina = SolaraViz(
-    modelo,
-    renderizador,
-    components=[],
-    model_params=PARAMETROS_MODELO,
-    name="Robots de limpieza reactivos - Mesa"
+	modelo,
+	renderizador,
+	components=[panelInformacion],
+	model_params=PARAMETROS_MODELO,
+	name="Robots de limpieza reactivos - Mesa"
 )
 
 # Solara exige la variable global 'page' al iniciar la aplicacion.
