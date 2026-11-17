@@ -1,0 +1,3 @@
+# Version estable. El extra rec instala Solara y soporte de visualizacion.
+mesa[rec]>=3.5,<4
+matplotlib>=3.8
