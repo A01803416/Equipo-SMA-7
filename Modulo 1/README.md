@@ -2,8 +2,6 @@
 
 Este proyecto **usa Mesa directamente**. Se actualizó la implementación anterior para emplear `CellAgent`, `OrthogonalMooreGrid`, `PropertyLayer`, `AgentSet.shuffle_do()`, `DataCollector` y **SolaraViz con SpaceRenderer**. No utiliza el motor de compatibilidad anterior ni Matplotlib como interfaz de simulación; Matplotlib es únicamente el backend que usa Mesa para representar el tablero.
 
-**Antes de entregar:** sustituir `Equipo SMA (completar...)` por los nombres y matrículas reales en las cabeceras y en el reporte.
-
 ## 1. Instalar
 
 Necesitas Python 3.12 o superior. Revisa con `python3 --version`. Abre Terminal (Mac) desde `Modulo_1/Robot_Limpieza_Reactivo`:

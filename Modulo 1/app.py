@@ -19,7 +19,7 @@ def agentPortrayal(agente):
 		color="#1262BD", size=145, marker="o", zorder=10,
 		edgecolors="#FFFFFF", linewidths=1.6,
 		tooltip={"Robot": agente.unique_id,
-				 "Movimientos": agente.movimientosRealizados}
+				"Movimientos": agente.movimientosRealizados}
 	)
 
 
